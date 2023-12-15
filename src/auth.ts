@@ -2,7 +2,7 @@ import NextAuth from "next-auth"
 
 // import Facebook from "next-auth/providers/facebook"
 import GitHub from "next-auth/providers/github"
-// import Google from "next-auth/providers/google"
+import Google from "next-auth/providers/google"
 // import Instagram from "next-auth/providers/instagram"
 
 import type { NextAuthConfig } from "next-auth"
@@ -17,7 +17,15 @@ export const config = {
   },
   providers: [
     // Facebook,
-    GitHub,
+    GitHub({
+      profile(profile) {
+        return { id: profile.id.toString(), role: "user", email: profile.email, name: profile.name ?? profile.login, image: profile.avatar_url }
+      },
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
+    Google({
+    })
     // Google,
     // Instagram,
   ],
