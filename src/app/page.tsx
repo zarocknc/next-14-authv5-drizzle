@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import { signIn, signOut, auth } from "@/auth"
+//import Image from 'next/image'
+import { auth } from "@/auth"
 import SignInButton from '@/components/buttons/SignInButton'
 
 
